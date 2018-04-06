@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Contracts\Repositories\ActiveRepositoryInterface;
 use App\Contracts\Repositories\UserRepositoryInterface;
-use App\Notifications\UserRegistration;
-use Illuminate\Http\Request;
 use App\Mail\RegistrationUser;
+use App\Http\Requests\UserRegistration;
+use Illuminate\Http\Response;
 
 class RegisterController extends Controller
 {
@@ -25,11 +25,12 @@ class RegisterController extends Controller
      * @param object $request
      * @return JSON
      */
-    public function register(Request $request)
-    {   
+    public function register(UserRegistration $request)
+    {
         $user = $this->userRepository->create($request->all());
-        $user->assignRole('User');
-        $prepareActivation = $this->activeRepository->create(['user_id' => $user->id, 'token' => str_random(64)]);
-        $email = $user->send($user->email, new RegistrationUser, $prepareActivation->toArray());
+        $notActive = $this->activeRepository->create(['user_id' => $user->id, 'token' => str_random(64)]);
+        $email = $user->send($user->email, new RegistrationUser, $notActive->toArray());
+        
+        return response()->json($user,200);
     }
 }

@@ -4,17 +4,39 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class UserTest extends TestCase
-{
+{   
+    use WithFaker;
+    use DatabaseTransactions;
+
     /**
-     * A basic test example.
+     * User should register account.
      *
      * @return void
      */
-    public function testExample()
-    {
-        $this->assertTrue(true);
+    public function testUserRegistration()
+    {   
+        //When I send form with user information
+        $user = [
+            'team_id' => 1,
+            'nick' => $this->faker->firstName,
+            'nick_game' => $this->faker->lastName,
+            'email' => $this->faker->email,
+            'skype' => $this->faker->word,
+            'password' => $this->faker->password,
+        ];
+        $response = $this->post(route('usersRegister'), $user);
+        //Then account should be saved in database
+        unset($user['password']);
+        $this->assertDatabaseHas('users', $user);
+        //And user should get response 200 with user account
+        $this->assertEquals(200, $response->status());
+        unset($user['team_id']);
+        foreach($user as $key => $val)
+        {
+            $this->assertArrayHasKey($key, $response->decodeResponseJson());
+        }
     }
 }
