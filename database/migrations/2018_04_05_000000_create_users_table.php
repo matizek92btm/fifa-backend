@@ -18,9 +18,11 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('team_id');
             $table->string('nick')->unique();
             $table->string('nick_game')->unique();
-            $table->string('skype');
+            $table->string('skype')->nullable();
             $table->string('email')->unique();
             $table->string('password');
+            $table->integer('points')->default(0);
+            $table->boolean('active')->default(0);
             $table->rememberToken();
             $table->timestamps();
 

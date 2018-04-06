@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Interface for userRepository
+ * Interface for roleRepository
  *
  * @package Contracts
  * @subpackage Repositories
@@ -13,6 +13,6 @@ namespace App\Contracts\Repositories;
 
 use App\Contracts\Repositories\RepositoryInterface;
 
-interface UserRepositoryInterface extends RepositoryInterface
+interface RoleRepositoryInterface extends RepositoryInterface
 {
 }
