@@ -9,17 +9,30 @@
 
 namespace App\Traits;
 
-use Illuminate\Mail\Mailable;
 use Illuminate\Support\Facades\Mail;
 
 trait TraitEmail
 {
     /**
+     * All type of emails.
+     *
+     * @var array
+     */
+    private $mailable = [
+        'RegistrationUser' => 'App\Mail\RegistrationUser',
+    ];
+
+    /**
      * Function to send email.
      */
-    public function send(string $to, Mailable $mailable, array $variables)
+    public function send(string $to, string $mailableName, array $variables)
     {
-        Mail::to($to)->send($mailable);
+        if (!isset($this->mailable[$mailableName])) {
+            throw new \Exception("Mailable $mailableName not exists");
+        } 
+        $qualifiedName = $this->mailable[$mailableName];
+        Mail::to($to)->send(new $qualifiedName($variables));
+
         if (count(Mail::failures()) > 0) {
             return false;
         }

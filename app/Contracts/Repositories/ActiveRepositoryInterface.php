@@ -15,4 +15,5 @@ use App\Contracts\Repositories\RepositoryInterface;
 
 interface ActiveRepositoryInterface extends RepositoryInterface
 {
+    public function findByToken(string $token);
 }

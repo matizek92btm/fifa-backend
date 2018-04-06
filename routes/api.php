@@ -18,5 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::prefix('users')->group(function() {
-    Route::post('register', 'RegisterController@register')->name('usersRegister');
+    Route::post('register', 'RegisterController@register')->name('users.register');
+    Route::get('register/confirm', 'RegisterController@confirm')->name('users.register.confirm');
 });

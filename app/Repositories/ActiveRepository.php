@@ -24,4 +24,9 @@ class ActiveRepository extends AbstractRepository implements ActiveRepositoryInt
     {
         return 'App\Models\Active';
     }
+
+    public function findByToken(string $token)
+    {
+        return $this->model->where('token', $token)->first();
+    }
 }
