@@ -22,6 +22,6 @@ return [
     'fail' => 'Wystąpił błąd poczas rejestracji konta. Prosimy spróbować później.',
     'accountConfirmationSuccess' => 'Twoje konto zostało aktywowane.',
     'accountConfirmationTokenNotExist' => 'Token nie istnieje lub został już wykorzystany do aktywacji konta.',
-    'accountConfirmationTokenEmpty' => 'Puty tokena.'
+    'accountConfirmationTokenEmpty' => 'Puty token.'
 
 ];
