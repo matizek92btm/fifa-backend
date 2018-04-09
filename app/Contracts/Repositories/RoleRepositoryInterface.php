@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Interface for roleRepository
+ * FIFACLUB Interface for roleRepository
  *
  * @package Contracts
  * @subpackage Repositories

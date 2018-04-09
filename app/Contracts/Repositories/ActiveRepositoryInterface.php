@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Interface for activeRepository
+ * FIFACLUB Interface for activeRepository
  *
  * @package Contracts
  * @subpackage Repositories
@@ -14,6 +14,13 @@ namespace App\Contracts\Repositories;
 use App\Contracts\Repositories\RepositoryInterface;
 
 interface ActiveRepositoryInterface extends RepositoryInterface
-{
+{   
+    /**
+     * Find activation by token. 
+     *
+     * @param string $token
+     * @return object
+     *   Collection.
+     */
     public function findByToken(string $token);
 }

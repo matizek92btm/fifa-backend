@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Abstract Repository.
+ * FIFACLUB Abstract Repository.
  *
  * @package Abstracts
  * @subpackage Repositories
@@ -161,7 +161,7 @@ abstract class AbstractRepository implements RepositoryInterface
      * @param integer $id
      *   Id.
      * @return object
-     *   Collections
+     *   Collection.
      */
     public function getById(int $id)
     {

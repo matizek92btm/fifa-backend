@@ -2,8 +2,9 @@
 
 /**
  * @file
- * FifaClub Email trait.
+ * FIFACLUB Email Trait
  *
+ * @package Traits
  * @author Mateusz Kaleta <kaleta@gdziezjemfit.pl>
  */
 

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Basic interface for all repositories.
+ * FIFACLUB Basic interface for all repositories.
  *
  * @package Contracts
  * @subpackage Repositories
@@ -18,7 +18,7 @@ interface RepositoryInterface
      *
      * @param array $columnsValues
      *   Array with key as columns in database, values as new value for column.
-     * @return Model
+     * @return object
      *   Model.
      */
     public function create(array $columnsValues);
@@ -26,7 +26,8 @@ interface RepositoryInterface
     /**
      * Returns all values from database for Model instance.
      *
-     * @return Collections
+     * @return object
+     *   Collection.
      */
     public function getAll();
 }

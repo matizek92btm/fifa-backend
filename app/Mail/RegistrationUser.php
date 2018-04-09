@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * @file
+ * FIFACLUB RegistrationUser Mailable.
+ *
+ * @package Mail
+ * @author Mateusz Kaleta <kaleta@gdziezjemfit.pl>
+ */
+
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;

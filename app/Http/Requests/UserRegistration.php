@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * @file
+ * FIFACLUB UserRegistration Requests.
+ *
+ * @package Http
+ * @subpackage Requests
+ * @author Mateusz Kaleta <kaleta@gdziezjemfit.pl>
+ */
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -29,7 +38,7 @@ class UserRegistration extends FormRequest
             'nick_game' => 'required|unique:users',
             'email' => 'required|unique:users',
             'password' => 'required|min:6',
-            'password_confirmation' => 'same:password'
-        ]; 
+            'password_confirmation' => 'same:password',
+        ];
     }
 }
