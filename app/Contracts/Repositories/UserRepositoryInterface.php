@@ -14,5 +14,13 @@ namespace App\Contracts\Repositories;
 use App\Contracts\Repositories\RepositoryInterface;
 
 interface UserRepositoryInterface extends RepositoryInterface
-{
+{   
+    /**
+     * Returns user by email. 
+     *
+     * @param string $email
+     * @return object
+     *   User.
+     */
+    public function findByEmail(string $email);
 }

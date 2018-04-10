@@ -14,13 +14,13 @@ namespace App\Contracts\Repositories;
 use App\Contracts\Repositories\RepositoryInterface;
 
 interface ActiveRepositoryInterface extends RepositoryInterface
-{   
+{
     /**
-     * Find activation by token. 
+     * Find activation by token.
      *
      * @param string $token
      * @return object
-     *   Collection.
+     *   Active.
      */
     public function findByToken(string $token);
 }
