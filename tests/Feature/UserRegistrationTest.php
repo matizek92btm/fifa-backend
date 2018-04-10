@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class UserTest extends TestCase
+class UserRegistrationTest extends TestCase
 {
     use WithFaker;
     use DatabaseTransactions;
