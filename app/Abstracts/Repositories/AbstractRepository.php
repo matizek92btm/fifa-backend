@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Abstract Repository.
+ * FIFACLUB Abstract Repository.
  *
  * @package Abstracts
  * @subpackage Repositories
@@ -25,7 +25,7 @@ abstract class AbstractRepository implements RepositoryInterface
     protected $model;
 
     /**
-     * Container instrance.
+     * Container instaance.
      *
      * @var object Container instance.
      */
@@ -94,6 +94,57 @@ abstract class AbstractRepository implements RepositoryInterface
     }
 
     /**
+     * Undocumented function
+     *
+     * @param integer $user_id
+     * @param array $columnValues
+     * @return void
+     */
+    public function edit(int $id, array $columnValues)
+    {
+        $model = $this->getById($id);
+
+        if (empty($model)) {
+            throw new \Exception("Model not found.");
+        }
+
+        foreach ($columnValues as $column => $value) {
+            $model->$column = $value;
+        }
+
+        $result = $model->save();
+
+        if (!$result) {
+            throw new \Exception("We can not edit data.");
+        }
+
+        return $model;
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param integer $id
+     * @return void
+     */
+    public function delete(int $id)
+    {
+        $model = $this->getById($id);
+
+        if (empty($model)) {
+            throw new \Exception("Model not found.");
+        }
+
+        $result = $model->delete();
+
+        if (!$result) {
+            throw new \Exception("We can not delete data.");
+        }
+
+        return true;
+    }
+
+    /**
      * Returns all values in database for Model instance.
      *
      * @return object
@@ -110,7 +161,7 @@ abstract class AbstractRepository implements RepositoryInterface
      * @param integer $id
      *   Id.
      * @return object
-     *   Collections
+     *   Collection.
      */
     public function getById(int $id)
     {
