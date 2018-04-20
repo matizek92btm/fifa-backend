@@ -32,11 +32,10 @@ class LoginController extends Controller
         $auth = $this->getUserTokens($request->email, $request->password);
         if (!isset($auth->error)) {
             $user = $this->userRepository->findByEmail($request->email);
-            if (!$user->active) {
-                return $this->jsonResponse();
-            }
+            $user = array_merge($user->toArray(), (array) $auth);
 
-            return $this->jsonResponse('registration.accountConfirmationSuccess', 'SUCCESS_OK', array_merge($user->toArray(), (array) $auth));
+            return (!$user->active) ? $this->jsonResponse() 
+                                    : $this->jsonResponse('registration.accountConfirmationSuccess', 'SUCCESS_OK', $user);
         }
 
         return $this->jsonResponse('login.account');

@@ -75,16 +75,14 @@ class RegisterController extends Controller
     public function confirm(Request $request)
     {
         $token = $request->get('token');
-        if (!empty($token)) {
-            $notActive = $this->activeRepository->findByToken($token);
-            if (!empty($notActive)) {
-                $edit = $this->userRepository->edit($notActive->user_id, ['active' => 1]);
-                $delete = $this->activeRepository->delete($notActive->id);
+        $notActive = $this->activeRepository->findByToken($token);
 
-                return $this->jsonResponse('registration.accountConfirmationSuccess');
-            }
-            return $this->jsonResponse('registration.accountConfirmationTokenNotExist');
+        if (!empty($notActive)) {
+            $edit = $this->userRepository->edit($notActive->user_id, ['active' => 1]);
+            $delete = $this->activeRepository->delete($notActive->id);
         }
-        return $this->jsonResponse('registration.accountConfirmationTokenEmpty');
+
+        return (!empty($edit) && !empty($delete)) ? $this->jsonResponse('registration.accountConfirmationSuccess')
+                                                  : $this->jsonResponse('registration.accountConfirmationFailed');
     }
 }
