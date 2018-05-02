@@ -21,12 +21,13 @@ trait TraitEmail
      */
     private $mailable = [
         'RegistrationUser' => 'App\Mail\RegistrationUser',
+        'PasswordRecovery' => 'App\Mail\PasswordRecovery',
     ];
 
     /**
      * Function to send email.
      */
-    public function send(string $to, string $mailableName, array $variables)
+    public function send(string $to, string $mailableName, array $variables = [])
     {
         if (!isset($this->mailable[$mailableName])) {
             throw new \Exception("Mailable $mailableName not exists");

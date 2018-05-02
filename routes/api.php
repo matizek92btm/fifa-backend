@@ -22,4 +22,6 @@ Route::prefix('users')->group(function() {
     /** @todo make this as PATCH when FRONT will be ready. It's GET only for test right now. */
     Route::get('register/confirm', 'RegisterController@confirm')->name('users.register.confirm');
     Route::get('login', 'LoginController@login')->name('users.login');
+    Route::post('password/recovery', 'UserController@passwordRecovery')->name('users.password.recovery');
+    Route::get('password/change', 'UserController@passwordChange')->name('users.password.change');
 });

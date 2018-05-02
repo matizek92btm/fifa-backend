@@ -12,6 +12,8 @@ namespace App\Repositories;
 
 use App\Abstracts\Repositories\AbstractRepository;
 use App\Contracts\Repositories\UserRepositoryInterface;
+use Carbon\Carbon;
+use DB;
 
 class UserRepository extends AbstractRepository implements UserRepositoryInterface
 {
@@ -35,5 +37,41 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
     public function findByEmail(string $email)
     {
         return $this->model->where('email', $email)->first();
+    }
+
+    /**
+     * Add token and user email to password_resets table.
+     * @param string $email
+     * @param string $token
+     *
+     * @return object
+     */
+    public function passwordRecovery(string $email, string $token)
+    {
+        return DB::table('password_resets')->insert([
+            ['email' => $email, 'token' => $token, 'created_at' => Carbon::now()],
+        ]);
+    }
+
+    /**
+     * Search user email in password_resets table.
+     *
+     * @param string $token
+     * @return object
+     */
+    public function findEmailByPasswordRecoveryToken(string $token)
+    {
+        return DB::table('password_resets')->select('email')->where('token', $token)->first();
+    }
+
+    /**
+     * Delete user information from password_resets table.
+     *
+     * @param string $email
+     * @return object
+     */
+    public function deletePasswordRecovery(string $email)
+    {
+        return DB::table('password_resets')->where('email', $email)->delete();
     }
 }

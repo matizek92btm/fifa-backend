@@ -94,9 +94,9 @@ abstract class AbstractRepository implements RepositoryInterface
     }
 
     /**
-     * Undocumented function
+     * Edit model
      *
-     * @param integer $user_id
+     * @param integer $id 
      * @param array $columnValues
      * @return void
      */

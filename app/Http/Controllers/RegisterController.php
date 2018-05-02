@@ -6,7 +6,7 @@
  *
  * @package Http
  * @subpackage Controllers
- * @author Mateusz Kaleta <kaleta@gdziezjemfit.pl>
+ * @author Mateusz Kaleta <mateusz.kaleta92@gmail.com>
  */
 
 namespace App\Http\Controllers;
@@ -75,14 +75,14 @@ class RegisterController extends Controller
     public function confirm(Request $request)
     {
         $token = $request->get('token');
-        $notActive = $this->activeRepository->findByToken($token);
+        $notActiveId = $this->activeRepository->findByToken($token)->id;
 
-        if (!empty($notActive)) {
-            $edit = $this->userRepository->edit($notActive->user_id, ['active' => 1]);
-            $delete = $this->activeRepository->delete($notActive->id);
+        if (!empty($notActiveId)) {
+            $edit = $this->userRepository->edit($notActiveId, ['active' => 1]);
+            $delete = $this->activeRepository->delete($notActiveId);
         }
 
         return (!empty($edit) && !empty($delete)) ? $this->jsonResponse('registration.accountConfirmationSuccess')
-                                                  : $this->jsonResponse('registration.accountConfirmationFailed');
+        : $this->jsonResponse('registration.accountConfirmationFailed');
     }
 }

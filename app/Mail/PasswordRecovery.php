@@ -1,21 +1,12 @@
 <?php
 
-/**
- * @file
- * FIFACLUB RegistrationUser Mailable.
- *
- * @package Mail
- * @author Mateusz Kaleta <kaleta@gdziezjemfit.pl>
- */
-
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
-class RegistrationUser extends Mailable
+class PasswordRecovery extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -44,8 +35,8 @@ class RegistrationUser extends Mailable
     public function build()
     {   
         return $this->from(env('MAIL_FROM'))
-                    ->subject('Witamy na portalu ' . env('APP_NAME'))
-                    ->view('emails.registration.user')
+                    ->subject('Odzyskiwanie hasła - ' . env('APP_NAME'))
+                    ->view('emails.users.passwordRecovery')
                     ->with($this->userInformation);
     }
 }

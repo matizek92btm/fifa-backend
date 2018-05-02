@@ -22,11 +22,29 @@ class LoginController extends Controller
     use TraitResponse;
     use TraitToken;
 
+    /**
+     * UserRepository instance.
+     *
+     * @var object
+     */
+    private $userRepository;
+
+    /**
+     * Create new instances of LoginController.
+     *
+     * @param UserRepository $user
+     */
     public function __construct(UserRepository $user)
     {
         $this->userRepository = $user;
     }
 
+    /**
+     * User login.
+     *
+     * @param Request $request
+     * @return string
+     */
     public function login(Request $request)
     {
         $auth = $this->getUserTokens($request->email, $request->password);
@@ -34,8 +52,8 @@ class LoginController extends Controller
             $user = $this->userRepository->findByEmail($request->email);
             $user = array_merge($user->toArray(), (array) $auth);
 
-            return (!$user->active) ? $this->jsonResponse() 
-                                    : $this->jsonResponse('registration.accountConfirmationSuccess', 'SUCCESS_OK', $user);
+            return (!$user->active) ? $this->jsonResponse()
+            : $this->jsonResponse('registration.accountConfirmationSuccess', 'SUCCESS_OK', $user);
         }
 
         return $this->jsonResponse('login.account');
