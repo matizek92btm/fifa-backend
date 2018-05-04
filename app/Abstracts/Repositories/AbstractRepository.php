@@ -94,7 +94,7 @@ abstract class AbstractRepository implements RepositoryInterface
     }
 
     /**
-     * Edit model
+     * Edit model in database.
      *
      * @param integer $id 
      * @param array $columnValues
@@ -103,7 +103,7 @@ abstract class AbstractRepository implements RepositoryInterface
     public function edit(int $id, array $columnValues)
     {
         $model = $this->getById($id);
-
+        
         if (empty($model)) {
             throw new \Exception("Model not found.");
         }
@@ -122,7 +122,7 @@ abstract class AbstractRepository implements RepositoryInterface
     }
 
     /**
-     * Undocumented function
+     * Delete model from database
      *
      * @param integer $id
      * @return void
@@ -164,7 +164,7 @@ abstract class AbstractRepository implements RepositoryInterface
      *   Collection.
      */
     public function getById(int $id)
-    {
+    {  
         return $this->model->find($id);
     }
 }

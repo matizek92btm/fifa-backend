@@ -2,7 +2,7 @@
 
 /**
  * @file
- * FIFACLUB UserController
+ * FIFACLUB RecoveryPasswordController
  *
  * @package Http
  * @subpackage Controllers
@@ -15,7 +15,7 @@ use App\Contracts\Repositories\UserRepositoryInterface;
 use App\Traits\TraitResponse;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class RecoveryPasswordController extends Controller
 {
     use TraitResponse;
 
@@ -45,7 +45,7 @@ class UserController extends Controller
     public function passwordRecovery(Request $request)
     {
         $user = $this->userRepository->findByEmail($request->email);
-
+    
         if ($user) {
             $token = str_random(64);
             $user->token = $token;
@@ -73,8 +73,9 @@ class UserController extends Controller
         $password = $request->password;
 
         $passwordRecovery = $this->userRepository->findEmailByPasswordRecoveryToken($token);
-
+    
         if ($passwordRecovery) {
+ 
             $userId = $this->userRepository->findByEmail($passwordRecovery->email)->id;
             $editPassword = $this->userRepository->edit($userId, ['password' => $password]);
             $deletePasswordRecovery = $this->userRepository->deletePasswordRecovery($passwordRecovery->email);

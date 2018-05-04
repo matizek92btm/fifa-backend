@@ -14,6 +14,11 @@ class UserRegistrationTest extends TestCase
     private $mockActiveRepository;
     private $mockUserRepository;
 
+    /**
+     * Basic setup.
+     *
+     * @return void
+     */
     public function setUp()
     {
         parent::setUp();
@@ -22,6 +27,13 @@ class UserRegistrationTest extends TestCase
         $this->mockUserRepository = $this->mock('App\Contracts\Repositories\UserRepositoryInterface');
     }
 
+    /**
+     * Mocker.
+     *
+     * @param string $class
+     * @param boolean $appInstance
+     * @return object
+     */
     public function mock(string $class, $appInstance = true)
     {
         $mock = \Mockery::mock($class);
@@ -106,7 +118,7 @@ class UserRegistrationTest extends TestCase
      *
      * @return void
      */
-    public function testUserRegistrationAccountConfirmationTokenNotExist()
+    public function testUserRegistrationAccountConfirmationFailed()
     {
         //Prepare all moks for tests.
         $this->mockActiveRepository->shouldReceive('findByToken')->once()->andReturn(false);
@@ -118,7 +130,7 @@ class UserRegistrationTest extends TestCase
         $response = $this->call('get', route('users.register.confirm'), $token);
         //Then user should get response 200 with correct text.
         $this->assertEquals(200, $response->status());
-        $this->assertEquals(__('registration.accountConfirmationTokenNotExist'), $response->original['responseText']);
+        $this->assertEquals(__('registration.accountConfirmationTokenFailed'), $response->original['responseText']);
     }
 
     /**

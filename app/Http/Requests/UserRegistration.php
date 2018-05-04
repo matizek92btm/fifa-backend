@@ -9,7 +9,7 @@
  * @author Mateusz Kaleta <kaleta@gdziezjemfit.pl>
  */
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
